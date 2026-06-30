@@ -1,6 +1,3 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
-
-/* Calendly widget styles */
-@import url('https://assets.calendly.com/assets/external/widget.css');
