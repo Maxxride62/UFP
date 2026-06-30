@@ -9,8 +9,18 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Load Calendly widget script
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
     return () => {
       document.documentElement.style.scrollBehavior = 'auto';
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
     };
   }, []);
 
@@ -361,59 +371,22 @@ export default function App() {
         </div>
       </section>
 
-      {/* Application Form */}
+      {/* Book a Call */}
       <section id="apply" className="bg-[#C4B89B] py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-5xl md:text-6xl mb-6 text-zinc-900 leading-tight">
             Ready to start?
           </h2>
           <p className="text-zinc-700 mb-12 text-base max-w-2xl leading-relaxed">
-            If you've read this far, something in here has already landed. The application is five questions. It takes five minutes. It doesn't commit you to anything except the act of being honest about where you are. That, it turns out, is where everything starts.
+            Book a 30-minute connection call. No pitch, no pressure — just a conversation to work out whether this is the right work for you right now.
           </p>
 
-          <form className="space-y-6 max-w-2xl">
-            <div>
-              <label className="block text-zinc-900 text-sm mb-2">Your name</label>
-              <input
-                type="text"
-                className="w-full px-4 py-3 bg-white/50 border border-zinc-400/50 focus:outline-none focus:border-zinc-900 transition-colors"
-              />
-            </div>
-            <div>
-              <label className="block text-zinc-900 text-sm mb-2">Email address</label>
-              <input
-                type="email"
-                className="w-full px-4 py-3 bg-white/50 border border-zinc-400/50 focus:outline-none focus:border-zinc-900 transition-colors"
-              />
-            </div>
-            <div>
-              <label className="block text-zinc-900 text-sm mb-2">What's happening right now that made you look for this?</label>
-              <textarea
-                rows={4}
-                className="w-full px-4 py-3 bg-white/50 border border-zinc-400/50 focus:outline-none focus:border-zinc-900 transition-colors resize-none"
-              />
-            </div>
-            <div>
-              <label className="block text-zinc-900 text-sm mb-2">What have you tried already?</label>
-              <textarea
-                rows={4}
-                className="w-full px-4 py-3 bg-white/50 border border-zinc-400/50 focus:outline-none focus:border-zinc-900 transition-colors resize-none"
-              />
-            </div>
-            <div>
-              <label className="block text-zinc-900 text-sm mb-2">What would need to change for this to feel worth it?</label>
-              <textarea
-                rows={4}
-                className="w-full px-4 py-3 bg-white/50 border border-zinc-400/50 focus:outline-none focus:border-zinc-900 transition-colors resize-none"
-              />
-            </div>
-            <button
-              type="submit"
-              className="px-8 py-4 bg-zinc-900 text-white hover:bg-zinc-800 transition-colors"
-            >
-              Submit application
-            </button>
-          </form>
+          {/* Calendly inline widget */}
+          <div
+            className="calendly-inline-widget"
+            data-url="https://calendly.com/nick-hireground?hide_gdpr_banner=1"
+            style={{ minWidth: '320px', height: '700px' }}
+          />
         </div>
       </section>
 
